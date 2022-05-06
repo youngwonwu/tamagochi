@@ -4,10 +4,10 @@ public class TamagochiApp {
 	private static String name;
 
 	public static void main(String[] args) {
-		Start start = new Start();
+//		Start start = new Start();
 		State state = new State();
 
-		start.run();
+//		start.run();
 		state.run();
 
 	}

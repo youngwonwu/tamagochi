@@ -25,7 +25,9 @@ public class State {
 	}
 
 	private void Info() {
+		start.run();
 		System.out.println();
+//		System.out.println("info");
 		System.out.println(start.getName() + "의 상태");
 		set();
 		

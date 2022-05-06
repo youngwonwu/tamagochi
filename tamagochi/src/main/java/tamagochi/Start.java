@@ -50,9 +50,9 @@ public class Start {
 		name= sc.nextLine();
 		
 		System.out.println("○●○●다마고치의 이름은 '" + name + "'입니다○●○●\n 열심히 키워보아요!! ۹(ÒہÓ)۶");
-		State st = new State();
-		st.getStart().setName(name);
-		st.run();
+//		State st = new State();
+//		st.getStart().setName(name);
+//		st.run();
 	}
 
 }
