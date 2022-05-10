@@ -3,7 +3,7 @@ package dto;
 import lombok.Data;
 
 @Data
-public class TamagochiVO {
+public class TamaUserVO {
 	
 	private String id;
 	private String password;

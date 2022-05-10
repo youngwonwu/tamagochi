@@ -19,19 +19,22 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 	@Override
 	public TamaInfoVO tamaInfoSelect(TamaInfoVO vo) {
 		//한개의 다마고치 조회
-		String sql = "SELECT * FROM TAMAINFO WHERE NAME = ?";
+		String sql = "SELECT * FROM TAMAGOCHI WHERE ID = ?";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getName());
+			psmt.setString(1, vo.getId());
 			rs = psmt.executeQuery();
 			
-			//아이디 비번이 맞을때 들고 와야하나...?????????????????????
-//			if(rs.next()) {
-//				vo = new TamaInfoVO();
-//				
-//		
-//			}
+			if(rs.next()) {
+				vo = new TamaInfoVO();
+				vo.setName(rs.getString("name"));
+				vo.setHungry(rs.getInt("hungry"));
+				vo.setClean(rs.getInt("clean"));
+				vo.setTlike(rs.getInt("tlike"));
+				vo.setHealth(rs.getInt("health"));
+				vo.setId(rs.getString("id"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -44,17 +47,18 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 	public int tamaInfoInsert(TamaInfoVO vo) {
 		//추가
 		int n = 0;
-		String sql = "INSERT INTO TAMAINFO VALUES(?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)";
+		String sql = "INSERT INTO TAMAGOCHI VALUES(?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getName());
 			psmt.setString(2, vo.getId());
-			
 			n = psmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return n;
 	}
@@ -63,7 +67,7 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 	public int tamaInfoUpdate(TamaInfoVO vo) {
 		//변경
 		int n = 0;
-		String sql = "UPDATE TAMAINFO NAME = ? WHERE ID = ?";
+		String sql = "UPDATE TAMAGOCHI NAME = ? WHERE ID = ?";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -74,6 +78,8 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return n;
 	}
@@ -82,7 +88,7 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 	public int tamaInfoDelete(TamaInfoVO vo) {
 		//삭제
 		int n = 0;
-		String sql = "DELETE FROM TAMAINFO WHERE ID = ?";
+		String sql = "DELETE FROM TAMAGOCHI WHERE NAME = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getId());
@@ -91,6 +97,8 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return n;
 	}

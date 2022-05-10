@@ -16,7 +16,7 @@ public class TamaInfoVO {
 		System.out.print("name : " + name + " | ");
 		System.out.print("hungry : " + hungry + " | ");
 		System.out.print("clean : " + clean + " | ");
-		System.out.print("tlike : " + tlike + " | ");
+		System.out.print("like : " + tlike + " | ");
 		System.out.print("health : " + health + " | ");
 		System.out.println("id : " + id + " | ");
 		return null;

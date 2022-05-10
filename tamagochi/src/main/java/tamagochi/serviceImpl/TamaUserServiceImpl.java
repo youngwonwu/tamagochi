@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.DataSource;
-import dto.TamagochiVO;
-import tamagochi.service.TamagochiService;
+import dto.TamaUserVO;
+import tamagochi.service.TamaUserService;
 
-public class TamagochiServiceImpl implements TamagochiService{
+public class TamaUserServiceImpl implements TamaUserService{
 	
 	private DataSource dao = DataSource.getInstance();
 	private Connection conn;
@@ -17,33 +19,33 @@ public class TamagochiServiceImpl implements TamagochiService{
 	private ResultSet rs;
 	
 	@Override
-	public TamagochiVO tamagochiSelect(TamagochiVO vo) {
-		//한개의 유저 조회
-		String sql = "SELECT * FROM TAMAGOCHI WHERE USERNO = ?";
+	public List<TamaUserVO> tamaUserSelect() {
+		List<TamaUserVO> tamaList = new ArrayList<TamaUserVO>();
+		TamaUserVO vo;
+		//회원조회
+		String sql = "SELECT * FROM TAMAUSER";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getId());
 			rs = psmt.executeQuery();
-			
-			if(rs.next()) {
-				vo = new TamagochiVO();
+			while(rs.next()) {
+				vo = new TamaUserVO();
 				vo.setId(rs.getString("id"));
 				vo.setPassword(rs.getString("password"));
-		
+				tamaList.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		return vo;
+		return tamaList;
 	}
 	@Override
-	public int tamagochiInsert(TamagochiVO vo) {
+	public int tamaUserInsert(TamaUserVO vo) {
 		//추가
 		int n = 0;
-		String sql = "INSERT INTO TAMAGOCHI VALUES(?,?)";
+		String sql = "INSERT INTO TAMAUSER VALUES(?,?)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -52,14 +54,16 @@ public class TamagochiServiceImpl implements TamagochiService{
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return n;
 	}
 	@Override
-	public int tamagochiUpdate(TamagochiVO vo) {
+	public int tamaUserUpdate(TamaUserVO vo) {
 		//변경
 		int n = 0;
-		String sql = "UPDATE TAMAGOCHI PASSWORD = ? WHERE ID = ?";
+		String sql = "UPDATE TAMAUSER PASSWORD = ? WHERE ID = ?";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -69,14 +73,16 @@ public class TamagochiServiceImpl implements TamagochiService{
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return n;
 	}
 	@Override
-	public int tamagochiDelete(TamagochiVO vo) {
+	public int tamaUserDelete(TamaUserVO vo) {
 		//삭제
 		int n = 0;
-		String sql = "DELETE FROM TAMAGOCHI WHERE ID = ?";
+		String sql = "DELETE FROM TAMAUSER WHERE ID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getId());
@@ -84,6 +90,8 @@ public class TamagochiServiceImpl implements TamagochiService{
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return n;
 	}

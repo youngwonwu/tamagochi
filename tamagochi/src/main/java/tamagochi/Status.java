@@ -3,11 +3,11 @@ package tamagochi;
 import lombok.Data;
 
 @Data
-public class State {
+public class Status {
 	
-	Start start = new Start();
+	Name tama = new Name();
 
-	public void run() {
+	public void statusRun() {
 		Info();
 	}
 
@@ -24,10 +24,9 @@ public class State {
 		health = 50;
 	}
 
-	private void Info() {
-		start.run();
+	public void Info() {
 		System.out.println();
-		System.out.println(start.getName() + "의 상태");
+		System.out.println(tama.getName() + "의 상태");
 		set();
 		
 		System.out.print("배고픔 : ");
