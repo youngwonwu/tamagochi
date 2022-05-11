@@ -1,37 +1,24 @@
 package tamagochi;
 
-import lombok.Data;
+import dto.TamaInfoVO;
+import tamagochi.service.TamaInfoService;
+import tamagochi.serviceImpl.TamaInfoServiceImpl;
 
-@Data
 public class Status {
 	
-	Name tama = new Name();
+	TamaInfoVO tamaVO = new TamaInfoVO();
+	TamaInfoService tamaSV = new TamaInfoServiceImpl();
 
-	public void statusRun() {
-		Info();
-	}
-
-	private int hungry;
-	private int clean;
-	private int like;
-	private int health;
 	private String x = "■", o = "□";
 
-	private void set() {		//상태 기본값
-		hungry = 50;
-		clean = 50;
-		like = 50;
-		health = 50;
-	}
-
 	public void Info() {
-		System.out.println();
-		System.out.println(tama.getName() + "의 상태");
-		set();
+		tamaVO = tamaSV.tamaInfoSelect(Start.loginTama.getId());
 		
+		System.out.println();
+		System.out.println(tamaVO.getName() + "의 상태");
 		System.out.print("배고픔 : ");
 		for (int i = 1; i <= 10; i++) {
-			if (hungry / 10 >= i) {
+			if (tamaVO.getHungry() / 10 >= i) {
 				System.out.print(x);
 			} else
 				System.out.print(o);
@@ -39,7 +26,7 @@ public class Status {
 		
 		System.out.print(" 청결 : ");
 		for (int i = 1; i <= 10; i++) {
-			if (clean / 10 >= i) {
+			if (tamaVO.getClean() / 10 >= i) {
 				System.out.print(x);
 			} else
 				System.out.print(o);
@@ -47,7 +34,7 @@ public class Status {
 		
 		System.out.print(" 애정 : ");
 		for (int i = 1; i <= 10; i++) {
-			if (like / 10 >= i) {
+			if (tamaVO.getTlike() / 10 >= i) {
 				System.out.print(x);
 			} else
 				System.out.print(o);
@@ -55,11 +42,12 @@ public class Status {
 		
 		System.out.print(" 건강 : ");
 		for (int i = 1; i <= 10; i++) {
-			if (health / 10 >= i) {
+			if (tamaVO.getHealth() / 10 >= i) {
 				System.out.print(x);
 			} else
 				System.out.print(o);
 		}
+		System.out.println();
 	}
 
 }

@@ -11,6 +11,7 @@ public class Start {
 	Member user = new Member();
 	Name tama = new Name();
 	Status tamainfo = new Status();
+	Action act = new Action();
 	
 	public static TamaUserVO loginTama = new TamaUserVO();
 	
@@ -19,31 +20,39 @@ public class Start {
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
 		System.out.println("○●	다	마	고	치	GAME	○●");
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
-		System.out.println();
-		System.out.println("○● 1.회원가입 2.로그인 3.비회원 ○●");
-		int menu = Integer.parseInt(sc.nextLine());
 		
-		if(menu == 1) {
-			//회원가입
-			user.member();
-			tama.name();
-			a();
-			tamainfo.Info();
+		while(true) {
+			System.out.println();
+			System.out.println("○●○● 1.회원가입 2.로그인 3.비회원 ○●○●");
+			int menu = Integer.parseInt(sc.nextLine());
 			
-		} else if(menu == 2) {
-			//로그인
-			user.login();		
-			
-		} else if(menu == 3) {
-			//비회원
-			System.out.println("언제 할까..ㅜ");
-			
+			if(menu == 1) {
+				//회원가입
+				user.member();
+				tama.name();
+				
+			} else if(menu == 2) {
+				//로그인
+				user.login();
+				startPrint();
+				tamainfo.Info();
+				act.action();
+				break;
+			}
+//			} else if(menu == 3) {
+//				//비회원
+//				System.out.println("언제 할까..ㅜ");
+//				
+//			}
 		}
-
 		//게임
 	}
 	
-	private void a() {
+	private void startPrint() {
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		System.out.println();
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
 		System.out.println("○●	다	마	고	치	START	○●");

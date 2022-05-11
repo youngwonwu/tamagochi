@@ -14,7 +14,7 @@ import tamagochi.service.TamaUserService;
 public class TamaUserServiceImpl implements TamaUserService{
 	
 	private DataSource dao = DataSource.getInstance();
-	private Connection conn;
+	private Connection conn =  dao.getConnection();
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	
@@ -25,7 +25,6 @@ public class TamaUserServiceImpl implements TamaUserService{
 		//회원조회
 		String sql = "SELECT * FROM TAMAUSER";
 		try {
-			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
@@ -47,7 +46,6 @@ public class TamaUserServiceImpl implements TamaUserService{
 		int n = 0;
 		String sql = "INSERT INTO TAMAUSER VALUES(?,?)";
 		try {
-			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getId());
 			psmt.setString(2, vo.getPassword());
