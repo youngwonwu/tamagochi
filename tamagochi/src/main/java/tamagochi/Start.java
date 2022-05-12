@@ -10,7 +10,7 @@ public class Start {
 	
 	Member user = new Member();
 	Name tama = new Name();
-	Status tamainfo = new Status();
+	Status status = new Status();
 	Action act = new Action();
 	
 	public static TamaUserVO loginTama = new TamaUserVO();
@@ -35,7 +35,10 @@ public class Start {
 				//로그인
 				user.login();
 				startPrint();
-				tamainfo.Info();
+				//스레드자리
+				mThread mt = new mThread();
+				mt.run();
+				status.InfoPrint();
 				act.action();
 				break;
 			}
@@ -49,14 +52,10 @@ public class Start {
 	}
 	
 	private void startPrint() {
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		status.blankPrint();
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
 		System.out.println("○●	다	마	고	치	START	○●");
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
 	}
-
+	
 }

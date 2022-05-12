@@ -20,7 +20,7 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 	public TamaInfoVO tamaInfoSelect(String id) {
 		TamaInfoVO vo = new TamaInfoVO();
 		//한개의 다마고치 조회
-		String sql = "SELECT * FROM TAMAGOCHI WHERE NAME = ?";
+		String sql = "SELECT * FROM TAMAGOCHI WHERE ID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
@@ -62,7 +62,6 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 		//변경
 		int n = 0;
 		String sql = "UPDATE TAMAGOCHI SET HUNGRY = ?, CLEAN = ?, TLIKE = ?, HEALTH = ? WHERE ID = ?";
-		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, vo.getHungry());

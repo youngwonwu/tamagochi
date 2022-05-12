@@ -34,8 +34,6 @@ public class Member {
 		// 아이디가 중복되지 않게 예외처리
 	}
 
-	
-
 	// 로그인
 	public void login() {
 		System.out.println("○●○●	LOGIN	○●○●");
