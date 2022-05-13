@@ -13,19 +13,20 @@ public class Action {
 	TamaInfoService tamaSV = new TamaInfoServiceImpl();
 	Status status = new Status();
 	Game game = new Game();
+	mThread mt = new mThread();
+	Print print = new Print();
 	
 	public void action() {
 		
-		
-		while(true) {
+		boolean isTrue = true;
+		while(isTrue) {
 			System.out.println();
-			status.sleepTime(1000);
+			print.sleepTime(1000);
 			System.out.println("○●○● 1.밥주기 2.샤워하기 3.잠재우기 4.놀아주기(미니게임) 5.종료 ○●○●");
 			int menu = sc.nextInt();
 			if(menu == 1) {
 				// 밥주기
 				eat();
-				
 			} else if(menu == 2) {
 				// 샤워하기
 				shower();
@@ -37,8 +38,11 @@ public class Action {
 				game.game();
 			} else {
 				// 종료
+				mThread.playing = true;
+				mt.run(false);
+				isTrue = false;
 				System.out.println("○● byebye ○●");
-				break;
+				return;
 			}
 		}
 		
@@ -53,6 +57,7 @@ public class Action {
 			System.out.println();
 			System.out.println("○●○● 1.주먹밥 2.쥬스 3.박X스 4.초코렛 5.야채 6.돌아가기 ○●○●");
 			int eats = sc.nextInt();
+			if(tamaVO.getHungry() > 0 || tamaVO.getHungry() <= 100) {
 				if (eats == 1) {
 					// 주먹밥
 					tamaVO.setHungry(tamaVO.getHungry() + 30);
@@ -92,21 +97,25 @@ public class Action {
 					run = false;
 					break;
 				}
+			}
+			print.sleepTime(1000);
 			System.out.println("너무 맛있어요!! ᵈʕ ᵔⰙᵔ ʔᵇ");
 			tamaSV.tamaInfoUpdate(tamaVO);
 			status.InfoPrint();
 		}
-		
 	}
 
 	public void shower() {
 		tamaVO = tamaSV.tamaInfoSelect(Start.loginTama.getId());
+		print.sleepTime(1000);
 		System.out.println("상쾌해요!! ˚✧₊⁎( ˘ω˘ )⁎⁺˳✧༚");
 		
+		if(tamaVO.getClean() > 0 || tamaVO.getClean() <= 100) {
 			tamaVO.setClean(tamaVO.getClean() + 30);
 			tamaVO.setHungry(tamaVO.getHungry() - 20);
 			tamaVO.setTlike(tamaVO.getTlike() - 10);
 			tamaVO.setHealth(tamaVO.getHealth() + 10);
+		}
 		
 		tamaSV.tamaInfoUpdate(tamaVO);
 		status.InfoPrint();
@@ -114,12 +123,15 @@ public class Action {
 
 	public void sleep() {
 		tamaVO = tamaSV.tamaInfoSelect(Start.loginTama.getId());
+		print.sleepTime(1000);
 		System.out.println("'" +  tamaVO.getName() + "' 자고 있이요 ૮꒰ྀི ⸝⸝ᴗ͈ ‸ ᴗ͈⸝⸝ ꒱ྀིა");
 		
+		if(tamaVO.getHealth() > 0 || tamaVO.getHealth() <= 100) {
 			tamaVO.setHealth(tamaVO.getHealth() + 20);
 			tamaVO.setClean(tamaVO.getClean() - 20);
 			tamaVO.setHungry(tamaVO.getHungry() - 30);
 			tamaVO.setTlike(tamaVO.getTlike() + 10);
+		}
 		
 		tamaSV.tamaInfoUpdate(tamaVO);
 		status.InfoPrint();

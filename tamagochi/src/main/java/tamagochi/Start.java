@@ -12,6 +12,8 @@ public class Start {
 	Name tama = new Name();
 	Status status = new Status();
 	Action act = new Action();
+	mThread mt = new mThread();
+	Print print = new Print();
 	
 	public static TamaUserVO loginTama = new TamaUserVO();
 	
@@ -21,7 +23,8 @@ public class Start {
 		System.out.println("○●	다	마	고	치	GAME	○●");
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
 		
-		while(true) {
+		boolean isTrue = true;
+		while(isTrue) {
 			System.out.println();
 			System.out.println("○●○● 1.회원가입 2.로그인 3.비회원 ○●○●");
 			int menu = Integer.parseInt(sc.nextLine());
@@ -34,13 +37,13 @@ public class Start {
 			} else if(menu == 2) {
 				//로그인
 				user.login();
-				startPrint();
+				print.startPrint();;
 				//스레드자리
-				mThread mt = new mThread();
-				mt.run();
+				mt.run(true);
 				status.InfoPrint();
 				act.action();
-				break;
+				
+				isTrue = false;
 			}
 //			} else if(menu == 3) {
 //				//비회원
@@ -50,12 +53,6 @@ public class Start {
 		}
 		//게임
 	}
-	
-	private void startPrint() {
-		status.blankPrint();
-		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
-		System.out.println("○●	다	마	고	치	START	○●");
-		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
-	}
+
 	
 }
