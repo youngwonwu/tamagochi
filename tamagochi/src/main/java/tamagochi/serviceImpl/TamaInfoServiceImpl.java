@@ -82,7 +82,7 @@ public class TamaInfoServiceImpl implements TamaInfoService {
 	public int tamaInfoDelete(TamaInfoVO vo) {
 		//삭제
 		int n = 0;
-		String sql = "DELETE FROM TAMAGOCHI WHERE NAME = ?";
+		String sql = "DELETE FROM TAMAGOCHI WHERE ID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getId());
