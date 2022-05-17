@@ -3,6 +3,7 @@ package tamagochi;
 public class Print {
 	
 	public void startPrint() {
+		sleepTime(1000);
 		blankPrint();
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
 		System.out.println("○●	다	마	고	치	START	○●");
@@ -21,7 +22,7 @@ public class Print {
 
 	// 공백출력
 	public void blankPrint() {
-		for (int i = 1; i <= 40; i++) {
+		for (int i = 1; i <= 50; i++) {
 			System.out.println();
 		}
 	}

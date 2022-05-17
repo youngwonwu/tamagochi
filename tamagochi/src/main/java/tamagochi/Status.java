@@ -15,7 +15,7 @@ public class Status {
 
 	public void InfoPrint() {
 		tamaVO = tamaSV.tamaInfoSelect(Start.loginTama.getId());
-		print.sleepTime(1000);
+		print.sleepTime(2000);
 		System.out.println();
 		System.out.println("'" + tamaVO.getName() + "'의 상태");
 		System.out.print("배고픔 : ");

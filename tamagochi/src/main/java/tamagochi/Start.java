@@ -20,7 +20,7 @@ public class Start {
 	public static TamaUserVO loginTama = new TamaUserVO();
 
 	public void start() {
-
+		print.blankPrint();
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");
 		System.out.println("○●	다	마	고	치	GAME	○●");
 		System.out.println("○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●");

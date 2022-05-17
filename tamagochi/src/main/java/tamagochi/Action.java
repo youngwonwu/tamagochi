@@ -20,8 +20,9 @@ public class Action {
 
 		boolean isTrue = true;
 		while (isTrue) {
-			System.out.println();
-			print.sleepTime(1000);
+			
+			print.sleepTime(2000);
+			print.blankPrint();
 			System.out.println("○●○● 1.밥주기 2.샤워하기 3.잠재우기 4.놀아주기(미니게임) 5.종료 ○●○●");
 			int menu = sc.nextInt();
 			if (menu == 1) {
